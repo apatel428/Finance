@@ -147,6 +147,8 @@ def buy():
         # Insert purchase into database
         db.execute("INSERT INTO portfolio(user_id, stock, shares, price, time, action) VALUES(:userid, :stock, :shares, :price, :time, :action)",\
         userid=session["user_id"], stock=quote, shares=shares, price=price, time=datetime.datetime.now(), action="BOUGHT")
+        
+        flash("Bought!")
 
         return redirect("/")
 
@@ -322,6 +324,8 @@ def sell():
 
                 db.execute("INSERT INTO portfolio(user_id, stock, shares, price, time, action) VALUES(:userid, :stock, :shares, :price, :time, :action)",\
                 userid=session["user_id"], stock=quote, shares=(-1)*shares, price=price, time=datetime.datetime.now(), action="SOLD")
+                
+                flash("Sold!")
 
         return redirect("/")
 
